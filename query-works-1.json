@@ -41,7 +41,12 @@
             "my-agg-3": {
               "terms": {
                 "field": "dimension_filter_nested.name.raw",
-                "size": 10
+                "size": 10,
+                "order": [{
+                  "max_score": "desc"
+                }, {
+                  "_key": "asc"
+                }]
               },
               "aggregations": {
                 "max_score": {

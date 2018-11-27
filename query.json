@@ -21,7 +21,7 @@
     }
   },
   "aggregations": {
-    "dimension_name--category-meine-produktkategorie-system-metric-language-de": {
+    "my-agg-1": {
       "filter": {
         "bool": {
           "must": [{
@@ -33,12 +33,12 @@
         }
       },
       "aggregations": {
-        "dimension_name": {
+        "my-agg-2": {
           "nested": {
             "path": "dimension_filter_nested"
           },
           "aggregations": {
-            "dimension_name": {
+            "my-agg-3": {
               "terms": {
                 "field": "dimension_filter_nested.name.raw",
                 "size": 10,
