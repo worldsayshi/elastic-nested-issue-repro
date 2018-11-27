@@ -9,7 +9,7 @@ Linux with sh, curl and docker-compose.
 ## How to reproduce
 
 ```sh
-$ docker-compose up
+$ docker-compose up -d
 $ sh test.sh
 ```
 
