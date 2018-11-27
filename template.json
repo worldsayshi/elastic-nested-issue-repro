@@ -2,31 +2,9 @@
   "index_patterns": ["*_de"],
   "mappings": {
     "default": {
-      "_meta": {
-        "git-commit": "no-git-id-availible"
-      },
       "properties": {
-        "category": {
-          "analyzer": "standard",
-          "fields": {
-            "edge_ngram_word": {
-              "analyzer": "edge_ngram_word_charmapped_lowercase",
-              "search_analyzer": "whitespace_charmapped_lowercase",
-              "type": "text"
-            },
-            "raw": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
-          },
-          "type": "text"
-        },
         "dimension_filter_nested": {
           "properties": {
-            "category": {
-              "index": "false",
-              "type": "keyword"
-            },
             "name": {
               "analyzer": "standard",
               "fields": {
@@ -36,85 +14,9 @@
                 }
               },
               "type": "text"
-            },
-            "symbol": {
-              "index": "false",
-              "type": "keyword"
-            },
-            "unit": {
-              "analyzer": "standard",
-              "fields": {
-                "raw": {
-                  "ignore_above": 256,
-                  "type": "keyword"
-                }
-              },
-              "type": "text"
-            },
-            "value": {
-              "analyzer": "standard",
-              "fields": {
-                "numeric": {
-                  "type": "double"
-                },
-                "raw": {
-                  "ignore_above": 256,
-                  "type": "keyword"
-                }
-              },
-              "type": "text"
             }
           },
           "type": "nested"
-        },
-        "display_designation": {
-          "analyzer": "standard",
-          "fields": {
-            "compressed": {
-              "analyzer": "designation_wildcard_compressed",
-              "search_analyzer": "designation_wildcard_compressed",
-              "type": "text"
-            },
-            "compressed_completion": {
-              "analyzer": "designation_edge_compressed",
-              "search_analyzer": "designation_keyword_compressed",
-              "type": "text"
-            },
-            "compressed_keyword": {
-              "analyzer": "designation_keyword_compressed",
-              "search_analyzer": "designation_keyword_compressed",
-              "type": "text"
-            },
-            "raw": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
-          },
-          "type": "text"
-        },
-        "language": {
-          "analyzer": "standard",
-          "fields": {
-            "raw": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
-          },
-          "type": "text"
-        },
-        "source": {
-          "analyzer": "standard",
-          "fields": {
-            "raw": {
-              "ignore_above": 256,
-              "type": "keyword"
-            },
-            "stem": {
-              "analyzer": "german",
-              "type": "text"
-            }
-          },
-          "type": "text"
         },
         "taxonomy": {
           "analyzer": "standard",
@@ -135,25 +37,6 @@
             }
           },
           "type": "text"
-        },
-        "title": {
-          "analyzer": "standard_charmapped",
-          "fields": {
-            "completion": {
-              "analyzer": "ngram_charmapped_lowercase_nospaces",
-              "search_analyzer": "keyword_charmapped_lowercase_nospaces",
-              "type": "text"
-            },
-            "raw": {
-              "ignore_above": 256,
-              "type": "keyword"
-            },
-            "stem": {
-              "analyzer": "german",
-              "type": "text"
-            }
-          },
-          "type": "text"
         }
       }
     }
@@ -162,10 +45,6 @@
     "index.indexing.slowlog.threshold.index.debug" : "0s",
     "index.search.slowlog.threshold.fetch.debug" : "0s",
     "index.search.slowlog.threshold.query.debug" : "0s",
-    "analysis.analyzer.designation_edge_compressed.char_filter": ["char_mappings", "designation_cleanup"],
-    "analysis.analyzer.designation_edge_compressed.filter": "lowercase",
-    "analysis.analyzer.designation_edge_compressed.tokenizer": "edge_ngram_full",
-    "analysis.analyzer.designation_edge_compressed.type": "custom",
     "analysis.analyzer.designation_keyword_compressed.char_filter": ["char_mappings", "designation_cleanup"],
     "analysis.analyzer.designation_keyword_compressed.filter": "lowercase",
     "analysis.analyzer.designation_keyword_compressed.tokenizer": "keyword",
@@ -174,14 +53,6 @@
     "analysis.analyzer.designation_wildcard_compressed.filter": "lowercase",
     "analysis.analyzer.designation_wildcard_compressed.tokenizer": "split_any_character",
     "analysis.analyzer.designation_wildcard_compressed.type": "custom",
-    "analysis.analyzer.edge_ngram_full_charmapped_lowercase_nospaces.char_filter": "char_mappings",
-    "analysis.analyzer.edge_ngram_full_charmapped_lowercase_nospaces.filter": ["lowercase", "space_remover"],
-    "analysis.analyzer.edge_ngram_full_charmapped_lowercase_nospaces.tokenizer": "edge_ngram_full",
-    "analysis.analyzer.edge_ngram_full_charmapped_lowercase_nospaces.type": "custom",
-    "analysis.analyzer.edge_ngram_word_charmapped_lowercase.char_filter": ["char_mappings", "parentheses"],
-    "analysis.analyzer.edge_ngram_word_charmapped_lowercase.filter": "lowercase",
-    "analysis.analyzer.edge_ngram_word_charmapped_lowercase.tokenizer": "edge_ngram_word",
-    "analysis.analyzer.edge_ngram_word_charmapped_lowercase.type": "custom",
     "analysis.analyzer.keyword_charmapped_lowercase_nospaces.char_filter": "char_mappings",
     "analysis.analyzer.keyword_charmapped_lowercase_nospaces.filter": ["lowercase", "space_remover"],
     "analysis.analyzer.keyword_charmapped_lowercase_nospaces.tokenizer": "keyword",
@@ -217,16 +88,6 @@
     "analysis.filter.space_remover.type": "pattern_replace",
     "analysis.normalizer.lowercase.filter": "lowercase",
     "analysis.normalizer.lowercase.type": "custom",
-    "analysis.tokenizer.edge_ngram_full.max_gram": "40",
-    "analysis.tokenizer.edge_ngram_full.min_gram": "2",
-    "analysis.tokenizer.edge_ngram_full.type": "edge_ngram",
-    "analysis.tokenizer.edge_ngram_word.max_gram": "40",
-    "analysis.tokenizer.edge_ngram_word.min_gram": "2",
-    "analysis.tokenizer.edge_ngram_word.token_chars": ["letter", "digit", "punctuation", "symbol"],
-    "analysis.tokenizer.edge_ngram_word.type": "edge_ngram",
-    "analysis.tokenizer.ngram.max_gram": "40",
-    "analysis.tokenizer.ngram.min_gram": "2",
-    "analysis.tokenizer.ngram.type": "ngram",
     "analysis.tokenizer.path.type": "path_hierarchy",
     "analysis.tokenizer.path_backslash.delimiter": "\\",
     "analysis.tokenizer.path_backslash.type": "path_hierarchy",
