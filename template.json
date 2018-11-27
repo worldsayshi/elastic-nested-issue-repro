@@ -21,19 +21,9 @@
         "taxonomy": {
           "analyzer": "standard",
           "fields": {
-            "hierarchical": {
-              "analyzer": "path",
-              "fielddata": true,
-              "search_analyzer": "keyword",
-              "type": "text"
-            },
             "raw": {
               "ignore_above": 256,
               "type": "keyword"
-            },
-            "stem": {
-              "analyzer": "german",
-              "type": "text"
             }
           },
           "type": "text"
@@ -45,49 +35,6 @@
     "index.indexing.slowlog.threshold.index.debug" : "0s",
     "index.search.slowlog.threshold.fetch.debug" : "0s",
     "index.search.slowlog.threshold.query.debug" : "0s",
-    "analysis.analyzer.keyword_charmapped_lowercase_nospaces.char_filter": "char_mappings",
-    "analysis.analyzer.keyword_charmapped_lowercase_nospaces.filter": ["lowercase", "space_remover"],
-    "analysis.analyzer.keyword_charmapped_lowercase_nospaces.tokenizer": "keyword",
-    "analysis.analyzer.keyword_charmapped_lowercase_nospaces.type": "custom",
-    "analysis.analyzer.ngram_charmapped_lowercase_nospaces.char_filter": "char_mappings",
-    "analysis.analyzer.ngram_charmapped_lowercase_nospaces.filter": ["lowercase", "space_remover"],
-    "analysis.analyzer.ngram_charmapped_lowercase_nospaces.tokenizer": "ngram",
-    "analysis.analyzer.ngram_charmapped_lowercase_nospaces.type": "custom",
-    "analysis.analyzer.path.tokenizer": "path",
-    "analysis.analyzer.path.type": "custom",
-    "analysis.analyzer.path_backslash_lowercase.filter": "lowercase",
-    "analysis.analyzer.path_backslash_lowercase.tokenizer": "path_backslash",
-    "analysis.analyzer.path_backslash_lowercase.type": "custom",
-    "analysis.analyzer.standard_charmapped.char_filter": "char_mappings",
-    "analysis.analyzer.standard_charmapped.filter": "lowercase",
-    "analysis.analyzer.standard_charmapped.tokenizer": "standard",
-    "analysis.analyzer.standard_charmapped.type": "custom",
-    "analysis.analyzer.whitespace_charmapped_lowercase.char_filter": "char_mappings",
-    "analysis.analyzer.whitespace_charmapped_lowercase.filter": "lowercase",
-    "analysis.analyzer.whitespace_charmapped_lowercase.tokenizer": "whitespace",
-    "analysis.analyzer.whitespace_charmapped_lowercase.type": "custom",
-    "analysis.char_filter.char_mappings.mappings": ["Ë => E", "ë => e"],
-    "analysis.char_filter.char_mappings.type": "mapping",
-    "analysis.char_filter.designation_cleanup.pattern": "[+\\s\\./-]+",
-    "analysis.char_filter.designation_cleanup.replacement": "",
-    "analysis.char_filter.designation_cleanup.type": "pattern_replace",
-    "analysis.char_filter.parentheses.pattern": "[\\(\\)]+",
-    "analysis.char_filter.parentheses.replacement": "",
-    "analysis.char_filter.parentheses.type": "pattern_replace",
-    "analysis.filter.designation_token_cleanup.type": "unique",
-    "analysis.filter.space_remover.pattern": " ",
-    "analysis.filter.space_remover.replacement": "",
-    "analysis.filter.space_remover.type": "pattern_replace",
-    "analysis.normalizer.lowercase.filter": "lowercase",
-    "analysis.normalizer.lowercase.type": "custom",
-    "analysis.tokenizer.path.type": "path_hierarchy",
-    "analysis.tokenizer.path_backslash.delimiter": "\\",
-    "analysis.tokenizer.path_backslash.type": "path_hierarchy",
-    "analysis.tokenizer.split_any_character.group": "0",
-    "analysis.tokenizer.split_any_character.pattern": "(.)",
-    "analysis.tokenizer.split_any_character.type": "pattern",
-    "index.max_result_window": "15000",
-    "index.refresh_interval": "5s",
     "number_of_replicas": "0",
     "number_of_shards": "1"
   }
