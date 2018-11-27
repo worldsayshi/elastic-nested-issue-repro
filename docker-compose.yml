@@ -1,9 +1,8 @@
 version: '2.2'
 services:
-# docker run -d -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.4.2 --name elastic
-  i3-ps-elastic:
+  elastic-repro:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
-    container_name: i3-ps-elastic
+    container_name: elastic-repro
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
@@ -14,32 +13,6 @@ services:
         hard: -1
     volumes:
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      # - esdata1:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
       - 9300:9300
-    networks:
-      - docker-i3-ps
-  kibana:
-    image: docker.elastic.co/kibana/kibana:6.4.2
-    container_name: i3-ps-kibana
-    environment:
-      - "ELASTICSEARCH_URL=http://i3-ps-elastic:9200"
-    # volumes:
-    #   - ./kibana.yml:/usr/share/kibana/config/kibana.yml
-    links:
-      - i3-ps-elastic
-    ports:
-      - 5601:5601
-    networks:
-      - docker-i3-ps
-    depends_on:
-      - i3-ps-elastic
-
-volumes:
-  esdata1:
-    driver: local
-
-networks:
-  docker-i3-ps:
-    driver: bridge
