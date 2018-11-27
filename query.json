@@ -1,0 +1,123 @@
+{
+  "size": 0,
+  "query": {
+    "dis_max": {
+      "tie_breaker": 0.7,
+      "queries": [{
+        "bool": {
+          "should": [{
+            "terms": {
+              "taxonomy.raw": ["/Meine produktkategorie"],
+              "boost": 1.0
+            }
+          }, {
+            "terms": {
+              "system": ["metric"],
+              "boost": 1.0
+            }
+          }, {
+            "terms": {
+              "language": ["de"],
+              "boost": 1.0
+            }
+          }, {
+            "nested": {
+              "query": {
+                "match": {
+                  "dimension_filter_nested.name": {
+                    "query": "Meine produktkategorie wellendurchmesser",
+                    "operator": "OR",
+                    "prefix_length": 0,
+                    "max_expansions": 50,
+                    "fuzzy_transpositions": true,
+                    "lenient": false,
+                    "zero_terms_query": "NONE",
+                    "auto_generate_synonyms_phrase_query": true,
+                    "boost": 1.0
+                  }
+                }
+              },
+              "path": "dimension_filter_nested",
+              "ignore_unmapped": false,
+              "score_mode": "avg",
+              "boost": 1.0
+            }
+          }],
+          "adjust_pure_negative": true,
+          "minimum_should_match": "0",
+          "boost": 1.0
+        }
+      }],
+      "boost": 1.2
+    }
+  },
+  "aggregations": {
+    "dimension_name--category-meine-produktkategorie-system-metric-language-de": {
+      "filter": {
+        "bool": {
+          "must": [{
+            "terms": {
+              "taxonomy.raw": ["/Meine produktkategorie"],
+              "boost": 1.0
+            }
+          }, {
+            "terms": {
+              "system": ["metric"],
+              "boost": 1.0
+            }
+          }, {
+            "terms": {
+              "language": ["de"],
+              "boost": 1.0
+            }
+          }],
+          "adjust_pure_negative": true,
+          "boost": 1.0
+        }
+      },
+      "aggregations": {
+        "dimension_name": {
+          "nested": {
+            "path": "dimension_filter_nested"
+          },
+          "aggregations": {
+            "dimension_name": {
+              "filter": {
+                "bool": {
+                  "adjust_pure_negative": true,
+                  "boost": 1.0
+                }
+              },
+              "aggregations": {
+                "dimension_name": {
+                  "terms": {
+                    "field": "dimension_filter_nested.name.raw",
+                    "size": 10,
+                    "min_doc_count": 1,
+                    "shard_min_doc_count": 0,
+                    "show_term_doc_count_error": false,
+                    "order": [{
+                      "max_score": "desc"
+                    }, {
+                      "_key": "asc"
+                    }]
+                  },
+                  "aggregations": {
+                    "max_score": {
+                      "max": {
+                        "script": {
+                          "source": "_score",
+                          "lang": "painless"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

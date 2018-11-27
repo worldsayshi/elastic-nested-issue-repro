@@ -1,0 +1,17 @@
+{
+  "dimension_filter_nested": [{
+    "category": "Dimensions",
+    "name": "Wellendurchmesser",
+    "symbol": "d<sub>1</sub>",
+    "unit": "mm",
+    "value": "123"
+  }],
+  "system": "metric",
+  "_collection": "WebPIM",
+  "language": "de",
+  "taxonomy": "/Meine produktkategorie",
+  "designation": "AB C-1234",
+  "category": "Meine produktkategorie",
+  "status": "03. Released",
+  "display_designation": "AB C-1234"
+}
