@@ -1,6 +1,11 @@
 
 
-# Reproducing elastic issues
+# Reproducing `Child query must not match same docs with parent filter` elastic issue
+
+Here is a minimal-ish reproduction of Elastic throwing an error when using a seemingly reasonable combination of queries and aggregations.
+Below are also examples of workarounds.
+
+Tested on Elastic 6.4.2.
 
 ## Prerequisites
 
@@ -48,6 +53,10 @@ $ sh test.sh
   "status": 500
 }
 ```
+
+## Known workarounds
+
+You can either set `size` to 1 or remove the score aggregation to avoid the exception. See `query-works-1.json` and `query-works-2.json` for examples.
 
 ## Useful links
 - [Stale but related issue: A problem involving parent-child documents ... ](https://github.com/elastic/elasticsearch/issues/28478)
