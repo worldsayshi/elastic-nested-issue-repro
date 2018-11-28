@@ -1,35 +1,22 @@
 {
   "size": 0,
   "query": {
-    "dis_max": {
-      "queries": [{
-        "bool": {
-          "should": [{
-            "nested": {
-              "query": {
-                "match": {
-                  "dimension_filter_nested.name": {
-                    "query": "Meine produktkategorie wellendurchmesser"
-                  }
-                }
-              },
-              "path": "dimension_filter_nested"
-            }
-          }]
+    "nested": {
+      "query": {
+        "match": {
+          "dimension_filter_nested.name": {
+            "query": "Meine produktkategorie wellendurchmesser"
+          }
         }
-      }]
+      },
+      "path": "dimension_filter_nested"
     }
   },
   "aggregations": {
     "my-agg-1": {
       "filter": {
-        "bool": {
-          "must": [{
-            "terms": {
-              "taxonomy.raw": ["/Meine produktkategorie"],
-              "boost": 1.0
-            }
-          }]
+        "terms": {
+          "taxonomy.raw": ["/Meine produktkategorie"]
         }
       },
       "aggregations": {
