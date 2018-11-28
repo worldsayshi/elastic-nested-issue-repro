@@ -5,7 +5,7 @@
 Here is a minimal-ish reproduction of Elastic throwing an error when using a seemingly reasonable combination of queries and aggregations.
 Below are also examples of workarounds.
 
-Tested on Elastic `6.4.2` and `6.5.1`. 
+Tested on Elastic `6.4.2`, `6.5.1` and `7.0.0-alpha1`. 
 
 ## Prerequisites
 
